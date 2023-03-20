@@ -10,12 +10,12 @@ The following instructions assume that you have Ruby and Rails installed on your
 
 Clone this repository to your local machine using the command:
 
-    git clone git@github.com:ErnestH1/pizza-restaraunt.git
+    git clone https://github.com/CaseyOchieng/phase-4-code-challenge
 
 Navigate into the project directory using the command:
 
 
-    cd pizza-restaraunt
+    cd pizza
 
 Install the required dependencies by running:
 
@@ -171,10 +171,7 @@ JSON data, along with the appropriate HTTP status code:
  - The Pizza Restaurant API is a sample Rails application that implements a simple pizza ordering system. 
  - It allows users to create restaurants, pizzas, and restaurant pizzas that link a particular pizza to a particular restaurant with a price. 
  - The project is licensed under the MIT license, which means that it can be freely cloned and modified by anyone. If you have any questions or feedback about the project, feel free to reach out.
-<br>
-<br>
-<br>
- Author: ErnestH1
-<br>
-<br>
- License: MIT
+ ## Author
+  [Casey Ochieng](https://github.com/CaseyOchieng)
+
+ ## License: MIT
