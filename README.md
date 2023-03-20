@@ -174,4 +174,5 @@ JSON data, along with the appropriate HTTP status code:
  ## Author
   [Casey Ochieng](https://github.com/CaseyOchieng)
 
- ## License: MIT
+ ## License
+  MIT
