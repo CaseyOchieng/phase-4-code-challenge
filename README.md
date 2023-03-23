@@ -1,176 +1,163 @@
-# Pizza Restaurant API
+# restaurantsApp
 
-This is a sample Rails application that implements a simple pizza ordering system, with three main models: Restaurant, Pizza, and RestaurantPizza. 
+this is a basic API built with rails.
 
-The application allows users to create restaurants and pizzas, and then create restaurant pizzas that link a particular pizza to a particular restaurant, along with a price.
+The application has been built with the MVC design pattern and REST convections.
 
-The following instructions assume that you have Ruby and Rails installed on your machine. If you do not, please follow the instructions in the Ruby and Rails documentation to install them.
-
-## Getting Started
-
-Clone this repository to your local machine using the command:
-
-    git clone https://github.com/CaseyOchieng/phase-4-code-challenge
-
-Navigate into the project directory using the command:
-
-
-    cd pizza-restaraunt
-
-Install the required dependencies by running:
-
-
-    bundle install
-
-
-Start the server by running:
-
-
-    rails s
-
-Open your web browser and navigate to http://localhost:3000/ to view the home page.
-
-## Usage
-
-The application has the following main features:
-Restaurants
-
-The application allows users to create restaurants, and to view a list of all restaurants or a single restaurant by ID. Users can also delete a restaurant by ID.
-Endpoints
-
-- GET /restaurants - Returns a list of all restaurants as JSON data.
-- GET /restaurants/:id - Returns a single restaurant and its associated pizzas by ID as JSON data. Returns an error message and appropriate HTTP status code if the restaurant does not exist.
-- DELETE /restaurants/:id - Deletes a restaurant and its associated restaurant pizzas by ID. Returns an empty response body and appropriate HTTP status code. Returns an error message and appropriate HTTP status code if the restaurant does not exist.
-
-## Endpoints
-1. GET /restaurants
-
-- Return JSON data in the format below:
+## Pre-Requisites
+In order to use this repository you will need the following:
 
 
 
-        [
-        {
-            "id": 1,
-            "name": "Sottocasa NYC",
-            "address": "298 Atlantic Ave, Brooklyn, NY 11201"
-        },
-        {
-            "id": 2,
-            "name": "PizzArte",
-            "address": "69 W 55th St, New York, NY 10019"
-        }
-        ]
+- Operating System **(Windows `10+`, Linux `3.8+`, or MacOS X `10.7+`)**
+- RAM >= 4GB
+- Free Space >= 2GB
 
-2.  GET /restaurants/:id
+## Built With
+This application has been built with the following tools:
 
-If the Restaurant exists, return JSON data in the format below:
+![ruby](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white)
+![sqlite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 
 
+- **Ruby `v2.7.+`**
+- **SQlite3 `v1.6`**
+- **ActiveRecord `v7.0.4`**
+- **Rake `v13.0.6`**
+- **Puma `v6.1`**
+- **rerun `v0.14`**
+- **Rails ``**
+- **ERB `v4.0`**
 
-    {
-    "id": 1,
-    "name": "Sottocasa NYC",
-    "address": "298 Atlantic Ave, Brooklyn, NY 11201",
-    "pizzas": [
-        {
-        "id": 1,
-        "name": "Cheese",
-        "ingredients": "Dough, Tomato Sauce, Cheese"
-        },
-        {
-        "id": 2,
-        "name": "Pepperoni",
-        "ingredients": "Dough, Tomato Sauce, Cheese, Pepperoni"
-        }
-    ]
-    }
+## Setup
+You can setup this repository by following this manual
 
-If the Restaurant does not exist, return the following JSON data, along with
-the appropriate HTTP status code:
+1. Clone the repository and navigate to restaurantApp folder.
+    ```{shell}
+   git clone https://github.com/CaseyOchieng/phase-4-code-challenge
+   ```
+2. Ensure the ruby gems are setup in your machine
+    ```{shell}
+   bundle install
+   ```
+3. Perform any pending database migrations
+   ```{shell}
+   rake db:migrate
+   ```
+4. You cant also seed some sample data with
+   ```{shell}
+   rake db:seed
 
+5. Run the server
+    ```{shell}
+    rails server or rails s 
+    ```
+6. Open the application from your browser
+    ```
+   http://localhost:3000
+   ```
+   
+## Application
+This application is a simple web API that allows users to:
 
-
-    {
-    "error": "Restaurant not found"
-    }
-
-3. DELETE /restaurants/:id
-
-- If the Restaurant exists, it should be removed from the database, along with
-any RestaurantPizzas that are associated with it.
-
-- After deleting the Restaurant, return an empty response body, along with the
-appropriate HTTP status code.
-
-- If the Restaurant does not exist, return the following JSON data, along with
-the appropriate HTTP status code:
-
-
-
-        {
-        "error": "Restaurant not found"
-        }
-
-4. GET /pizzas
-
-Return JSON data in the format below:
+- view all the restaurants.
+- view a single restaurant with its available pizzas.
+- Delete a restaurant.
+- view all the pizzas.
+- add a restaurant pizza with the price.
 
 
-    [
-    {
-        "id": 1,
-        "name": "Cheese",
-        "ingredients": "Dough, Tomato Sauce, Cheese"
-    },
-    {
-        "id": 2,
-        "name": "Pepperoni",
-        "ingredients": "Dough, Tomato Sauce, Cheese, Pepperoni"
-    }
-    ]
-
-5. POST /restaurant_pizzas
-
-- This route should create a new RestaurantPizza that is associated with an
-existing Pizza and Restaurant. It should accept an object with the following
-properties in the body of the request:
+### MODELS
+Database schema definitions.
 
 
+
+####  restaurants table
+
+| COLUMN      | DATA TYPE  | DESCRIPTION                                  | 
+|-------------|------------|----------------------------------------------|
+| id          | Integer    | Unique identifier.                           |
+| name        | String     | The name of the restaurant                   |
+| address     | String     | The address of the restaurant.               |
+| timestamp   | Date       | timestamp restaurant was created and updated.|
+
+
+
+#### pizzas table
+| COLUMN        | DATA TYPE | DESCRIPTION                               | 
+|---------------|-----------|-------------------------------------------|
+| id            | Integer   | Unique identifier.                        |
+| name          | String    | pizzas name.                              |
+| ingredients   | String    | pizzas ingredients                        |
+| timestamp     | Date      | timestamp pizza was created and updated.  |
+
+#### restaurant pizzas table
+| COLUMN        | DATA TYPE | DESCRIPTION                                       | 
+|---------------|-----------|---------------------------------------------------|
+| id            | Integer   | Unique identifier.                                |
+| restaurant_id | Integer   | foreign key restaurant identification             |
+| pizza_id      | Integer   | foreign key pizza identification                  |
+| timestamp   | Date        | timestamp restaurant pizza was created and updated.|
+
+
+
+
+### ROUTES
+
+1. GET ``` /restaurants ``` 
+    ## RESPONSE SAMPLE
+
+  
+2. GET ```  /restaurants/:id ``` 
+    ## RESPONSE SAMPLE if restaurant is found
+   
+
+
+    ## RESPONSE SAMPLE if restaurant is not found
+
+  
+
+3. DELETE ``` /restaurants/:id ``` 
+
+    ## RESPONSE SAMPLE if restaurant is delete is successful found
+
+    
+    ## RESPONSE SAMPLE if restaurant is not found
+
+
+
+4. GET ``` /pizzas ``` 
+
+    ## RESPONSE SAMPLE
+
+
+5. POST ``` /restaurant_pizzas ```
+
+   ```{json}
+   ## REQUEST BODY SAMPLE
         {
         "price": 5,
         "pizza_id": 1,
         "restaurant_id": 3
         }
+   ```
 
-- If the RestaurantPizza is created successfully, send back a response with the data
-related to the Pizza:
+   ## RESPONSE SAMPLE if the data was valid
 
-
+    ```
         {
         "id": 1,
         "name": "Cheese",
         "ingredients": "Dough, Tomato Sauce, Cheese"
         }
+    ```
 
-- If the RestaurantPizza is not created successfully, return the following
-JSON data, along with the appropriate HTTP status code:
+    ## RESPONSE SAMPLE if the data was not valid
 
-
-
-        {
-        "errors": ["validation errors"]
-        }
+  
 
 
-## Conclusion 
+## Author
+This repository is maintained by:
 
- - The Pizza Restaurant API is a sample Rails application that implements a simple pizza ordering system. 
- - It allows users to create restaurants, pizzas, and restaurant pizzas that link a particular pizza to a particular restaurant with a price. 
- - The project is licensed under the MIT license, which means that it can be freely cloned and modified by anyone. If you have any questions or feedback about the project, feel free to reach out.
-
- ## Author
- [Casey ochieng](https://github.com/CaseyOchieng/phase-4-code-challenge)
-
- ## License 
- MIT
+- [Casey Ochieng](https://github.com/CaseyOchieng) 
