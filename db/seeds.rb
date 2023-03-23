@@ -1,31 +1,22 @@
-puts "Seeding...."
+puts "started seeding..."
 
-require 'faker'
-
-# Create restaurants
-10.times do
-  Restaurant.create(
-    name: Faker::Restaurant.name,
-    address: Faker::Address.full_address
-  )
+5.times do
+    name = Faker::Restaurant.name
+    address =  Faker::Address.street_address
+    Restaurant.create(name:name, address:address)
 end
 
-# Create pizzas
-10.times do
-  Pizza.create(
-    name: Faker::Food.dish,
-    ingredients: Faker::Food.ingredients
-  )
+5.times do
+    name = Faker::Food.dish
+    ingredients = Faker::Food.ingredient
+    Pizza.create(name:name, ingredients:ingredients)
 end
 
-# Create restaurant pizzas
-20.times do
-  RestaurantPizza.create(
-    restaurant: Restaurant.all.sample,
-    pizza: Pizza.all.sample,
-    price: rand(1.0..30.0).round(2)
-  )
+5.times do
+    price = Faker::Commerce.price(range: 1..30)
+    pizza_id = rand(1..5)
+    restaurant_id = rand(1..5)
+    RestaurantPizza.create(price:price, pizza_id:pizza_id, restaurant_id:restaurant_id)
 end
 
-
-puts "Seeding Done!"
+puts "Completed seeding."
