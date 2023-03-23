@@ -1,4 +1,4 @@
-z# Pizza Restaurant API
+# Pizza Restaurant API
 
 This is a sample Rails application that implements a simple pizza ordering system, with three main models: Restaurant, Pizza, and RestaurantPizza. 
 
